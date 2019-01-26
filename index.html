@@ -5,18 +5,64 @@
     <link rel="stylesheet" href="style.css">
     <script src="main.js"></script>
 </head>
-<body>
+<body id="body" onload="pageIsLoaded()">
     <div class="header">
-        <h1>JavaScript Basics</h1>
+        <h1 id="heading">JavaScript Basics</h1>
         <p>Hello World!</p>
     </div>
 
     <div class="container">
-
+        <h3 id="time"></h3>
+        <button onclick="doClick(this)" onmouseover="mouseOnButton()">Click Me</button>
     </div>
 
+    <form method="POST" action="something.php" name="loginForm" onsubmit=" return validateForm()">
+        <div>
+            <label>First Name</label>
+            <input type="text" name="firstName" id="firstName" placeholder="Enter First Name">
+        </div> 
+        <br>
+        <div>
+            <label>Last Name</label>
+            <input type="text" name="lastName" id="lastName" placeholder="Enter Last Name">
+        </div> 
+        <br>
+        <div>
+            <label>Background</label>
+            <select name="background" id="background" onchange="changeBackgroundColor(this)">
+                <option value="lightcoral">Red</option>
+                <option value="lightseagreen">Green</option>
+                <option value="lightskyblue">Blue</option>
+            </select>
+        </div>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
     <script>
-       // alert("Hello!")
+        function doClick(id) {
+            id.innerHTML = "You Clicked"
+            alert("You clicked")
+            document.getElementById("heading").innerHTML = "Button Was Clicked!"
+            document.getElementById("time").innerHTML = Date()
+        }
+        function mouseOnButton() {
+            console.log("Mouse on button")
+        }
+        function pageIsLoaded() {
+            console.log("Page is loaded")
+        }
+        function changeBackgroundColor(select) {
+            var body = document.getElementById("body")
+            body.style.backgroundColor = select.value
+        }
+        function validateForm() {
+            var enteredString = document.forms["loginForm"]["firstName"].value
+            if(enteredString == null || enteredString == "") {
+                alert("First Name Is Required")
+                return false
+            }
+        }
     </script>
 </body>
 </html>
